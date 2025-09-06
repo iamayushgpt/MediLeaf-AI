@@ -35,17 +35,20 @@ The MediLeaf backend is a RESTful API built with modern Node.js practices, provi
 ## 🛠 Technology Stack
 
 ### Core Dependencies
+
 - **Node.js** (>=16.0.0) - JavaScript runtime
 - **Express.js** (5.1.0) - Web application framework
 - **MongoDB** - NoSQL database (Atlas cloud)
 - **Mongoose** (8.8.4) - MongoDB object modeling
 
 ### Authentication & Security
+
 - **bcrypt** (5.1.1) - Password hashing
 - **jsonwebtoken** (9.0.2) - JWT token generation/verification
 - **cors** (2.8.5) - Cross-origin resource sharing
 
 ### Development Tools
+
 - **nodemon** (3.1.9) - Development auto-restart
 - **morgan** (1.10.0) - HTTP request logger
 - **dotenv** (16.4.7) - Environment variable management
@@ -180,6 +183,7 @@ npm run dev
 ## 📡 API Documentation
 
 ### Base URL
+
 ```
 Local Development: http://localhost:5001/api
 Production: https://your-domain.com/api
@@ -188,6 +192,7 @@ Production: https://your-domain.com/api
 ### Authentication Endpoints
 
 #### Register User
+
 ```http
 POST /api/auth/register
 Content-Type: application/json
@@ -200,6 +205,7 @@ Content-Type: application/json
 ```
 
 **Response (201):**
+
 ```json
 {
   "success": true,
@@ -218,6 +224,7 @@ Content-Type: application/json
 ```
 
 #### Login User
+
 ```http
 POST /api/auth/login
 Content-Type: application/json
@@ -229,6 +236,7 @@ Content-Type: application/json
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -246,12 +254,14 @@ Content-Type: application/json
 ```
 
 #### Get Current User
+
 ```http
 GET /api/auth/me
 Authorization: Bearer <jwt-token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -282,6 +292,7 @@ All endpoints return consistent error responses:
 ```
 
 **Common HTTP Status Codes:**
+
 - `200` - Success
 - `201` - Created
 - `400` - Bad Request (validation errors)
@@ -294,6 +305,7 @@ All endpoints return consistent error responses:
 ### Testing API Endpoints
 
 #### Using curl
+
 ```bash
 # Register a new user
 curl -X POST http://localhost:5001/api/auth/register \
@@ -311,6 +323,7 @@ curl -X GET http://localhost:5001/api/auth/me \
 ```
 
 #### Using Postman
+
 1. Import the collection from `postman/MediLeaf-API.json` (coming soon)
 2. Set environment variables for base URL and tokens
 3. Run the requests in sequence
@@ -363,12 +376,14 @@ curl -X GET http://localhost:5001/api/auth/me \
 ```
 
 ### Indexes
+
 - **email**: Unique index for fast user lookup
 - **createdAt**: For sorting and pagination
 
 ## ⚙️ Environment Configuration
 
 ### Development (.env)
+
 ```env
 NODE_ENV=development
 PORT=5001
@@ -379,6 +394,7 @@ FRONTEND_URL=http://localhost:5173
 ```
 
 ### Production (.env.production)
+
 ```env
 NODE_ENV=production
 PORT=5001
@@ -390,14 +406,14 @@ FRONTEND_URL=https://yourdomain.com
 
 ### Environment Variables Explained
 
-| Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
-| `NODE_ENV` | Environment mode | development | Yes |
-| `PORT` | Server port | 5001 | No |
-| `MONGODB_URI` | MongoDB connection string | - | Yes |
-| `JWT_SECRET` | JWT signing secret | - | Yes |
-| `JWT_EXPIRE` | JWT token expiration | 7d | No |
-| `FRONTEND_URL` | Frontend URL for CORS | - | No |
+| Variable       | Description               | Default     | Required |
+| -------------- | ------------------------- | ----------- | -------- |
+| `NODE_ENV`     | Environment mode          | development | Yes      |
+| `PORT`         | Server port               | 5001        | No       |
+| `MONGODB_URI`  | MongoDB connection string | -           | Yes      |
+| `JWT_SECRET`   | JWT signing secret        | -           | Yes      |
+| `JWT_EXPIRE`   | JWT token expiration      | 7d          | No       |
+| `FRONTEND_URL` | Frontend URL for CORS     | -           | No       |
 
 ## 🧪 Testing
 
@@ -441,12 +457,14 @@ npm run test:db
 ### Railway Deployment
 
 1. **Connect Repository**
+
    ```bash
    # Push to GitHub
    git push origin main
    ```
 
 2. **Configure Environment**
+
    - Add environment variables in Railway dashboard
    - Set `NODE_ENV=production`
 
@@ -495,33 +513,39 @@ GET /health/detailed
 ### Common Issues
 
 #### 1. MongoDB Connection Error
+
 ```
 Error: MongoServerError: bad auth Authentication failed
 ```
 
 **Solution:**
+
 - Check MongoDB URI in `.env`
 - Verify username/password
 - Ensure IP whitelist includes your IP
 - Check cluster status in MongoDB Atlas
 
 #### 2. JWT Secret Missing
+
 ```
 Error: JWT secret is required
 ```
 
 **Solution:**
+
 ```bash
 # Add to .env file
 JWT_SECRET=your-secret-key-min-32-characters
 ```
 
 #### 3. Port Already in Use
+
 ```
 Error: listen EADDRINUSE: address already in use :::5001
 ```
 
 **Solutions:**
+
 ```bash
 # Option 1: Kill process using port
 npx kill-port 5001
@@ -535,12 +559,14 @@ taskkill /PID <process_id> /F
 ```
 
 #### 4. CORS Errors
+
 ```
-Access to fetch at 'http://localhost:5001/api/auth/login' 
+Access to fetch at 'http://localhost:5001/api/auth/login'
 from origin 'http://localhost:5173' has been blocked by CORS policy
 ```
 
 **Solution:**
+
 - Check `FRONTEND_URL` in `.env`
 - Ensure CORS middleware is properly configured
 
@@ -566,6 +592,7 @@ HTTP/1.1 GET /api/auth/me - 401 12ms
 ### Performance Monitoring
 
 Monitor key metrics:
+
 - Response times
 - Database query performance
 - Memory usage

@@ -33,12 +33,14 @@ MediLeaf is a modern web application that combines computer vision and machine l
 ## ✨ Features
 
 ### Current Features (v1.0)
+
 - ✅ **User Authentication** - Secure registration and login system
 - ✅ **Responsive Design** - Mobile-first design with Tailwind CSS
 - ✅ **Protected Routes** - Role-based access control
 - ✅ **Professional UI** - Modern, intuitive user interface
 
 ### Upcoming Features (v2.0)
+
 - 🔄 **Image Upload** - Support for multiple image formats
 - 🔄 **Camera Integration** - Real-time camera capture
 - 🔄 **AI Plant Recognition** - Advanced ML-based plant identification
@@ -50,6 +52,7 @@ MediLeaf is a modern web application that combines computer vision and machine l
 ## 🛠 Technology Stack
 
 ### Frontend
+
 - **Framework**: React 19.1.1 with Hooks and Context API
 - **Build Tool**: Vite 7.1.2 for fast development and building
 - **Styling**: Tailwind CSS 4.1.13 for utility-first styling
@@ -58,6 +61,7 @@ MediLeaf is a modern web application that combines computer vision and machine l
 - **Icons**: Lucide React 0.542.0 for consistent iconography
 
 ### Backend
+
 - **Runtime**: Node.js (>=16.0.0)
 - **Framework**: Express.js 5.1.0 for RESTful API
 - **Database**: MongoDB Atlas with Mongoose ODM
@@ -67,6 +71,7 @@ MediLeaf is a modern web application that combines computer vision and machine l
 - **Logging**: Morgan for request logging
 
 ### Development Tools
+
 - **Linting**: ESLint with React and Node.js configurations
 - **Version Control**: Git with conventional commit standards
 - **Environment**: dotenv for environment variable management
@@ -136,12 +141,14 @@ MediLeaf/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/medileaf.git
    cd medileaf
    ```
 
 2. **Setup Backend**
+
    ```bash
    cd backend
    npm install
@@ -151,6 +158,7 @@ MediLeaf/
    ```
 
 3. **Setup Frontend** (in a new terminal)
+
    ```bash
    cd frontend
    npm install
@@ -162,6 +170,7 @@ MediLeaf/
    - Backend API: http://localhost:5001
 
 For detailed setup instructions, see:
+
 - [Backend Setup Guide](./backend/README.md)
 - [Frontend Setup Guide](./frontend/README.md)
 
@@ -172,11 +181,13 @@ For detailed setup instructions, see:
 We follow the **GitHub Flow** with conventional commits:
 
 1. **Create a feature branch**
+
    ```bash
    git checkout -b feature/plant-identification
    ```
 
 2. **Make changes and commit**
+
    ```bash
    git add .
    git commit -m "feat(ml): add plant identification service"
@@ -200,6 +211,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -209,6 +221,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 - `chore`: Maintenance tasks
 
 **Examples:**
+
 ```bash
 feat(auth): add user registration with email verification
 fix(api): handle edge case in JWT token validation
@@ -227,15 +240,16 @@ refactor(frontend): modernize AuthContext with hooks
 
 ### Authentication Endpoints
 
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/auth/register` | Register new user | No |
-| POST | `/api/auth/login` | User login | No |
-| GET | `/api/auth/me` | Get current user | Yes |
+| Method | Endpoint             | Description       | Auth Required |
+| ------ | -------------------- | ----------------- | ------------- |
+| POST   | `/api/auth/register` | Register new user | No            |
+| POST   | `/api/auth/login`    | User login        | No            |
+| GET    | `/api/auth/me`       | Get current user  | Yes           |
 
 ### Request/Response Examples
 
 **Register User:**
+
 ```bash
 POST /api/auth/register
 Content-Type: application/json
@@ -248,6 +262,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -301,12 +316,13 @@ For complete API documentation, see [API_DOCS.md](./docs/API_DOCS.md) (coming so
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 # Backend tests
 cd backend
 npm test
 
-# Frontend tests  
+# Frontend tests
 cd frontend
 npm test
 
@@ -315,6 +331,7 @@ npm run test:all
 ```
 
 ### Test Coverage
+
 - Unit Tests: 80%+ coverage target
 - Integration Tests: API endpoints
 - E2E Tests: Critical user flows (coming soon)
@@ -322,6 +339,7 @@ npm run test:all
 ## 🚢 Deployment
 
 ### Production Build
+
 ```bash
 # Build frontend
 cd frontend
@@ -333,6 +351,7 @@ npm start
 ```
 
 ### Environment Variables
+
 ```env
 # Backend (.env)
 NODE_ENV=production
@@ -342,6 +361,7 @@ JWT_SECRET=your-super-secret-jwt-key
 ```
 
 ### Docker Support (Coming Soon)
+
 ```bash
 docker-compose up -d
 ```
@@ -351,6 +371,7 @@ docker-compose up -d
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
 ### Development Setup
+
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
@@ -358,6 +379,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 5. Submit a pull request
 
 ### Code of Conduct
+
 This project adheres to the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## 📄 License

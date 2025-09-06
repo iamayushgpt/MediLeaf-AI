@@ -35,21 +35,25 @@ The MediLeaf frontend is a modern, responsive React application built with perfo
 ## 🛠 Technology Stack
 
 ### Core Framework
+
 - **React** (19.1.1) - UI library with hooks and context
 - **Vite** (7.1.2) - Next-generation frontend build tool
 - **React Router DOM** (7.8.2) - Client-side routing
 
 ### Styling & UI
+
 - **Tailwind CSS** (4.1.13) - Utility-first CSS framework
 - **Lucide React** (0.542.0) - Beautiful, customizable icons
 - **CSS3** - Modern CSS features and animations
 
 ### HTTP & State
+
 - **Axios** (1.11.0) - Promise-based HTTP client
 - **React Context** - Built-in state management
 - **Local Storage** - Token persistence
 
 ### Development Tools
+
 - **ESLint** - Code linting and quality
 - **PostCSS** - CSS processing
 - **Autoprefixer** - CSS vendor prefixing
@@ -190,6 +194,7 @@ npm install --save-dev package-name
 ### Development Workflow
 
 1. **Start Development Server**
+
    ```bash
    npm run dev
    ```
@@ -215,15 +220,16 @@ npm install --save-dev package-name
 ## 🧩 Components Guide
 
 ### App.jsx
+
 The main application component that sets up routing and global providers.
 
 ```jsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
-import Home from './components/Home'
-import Login from './components/Login'
-import Register from './components/Register'
-import ProtectedRoute from './components/ProtectedRoute'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -232,49 +238,60 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          } />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
-  )
+  );
 }
 ```
 
 ### Home.jsx
+
 The main dashboard component for authenticated users.
 
 **Features:**
+
 - User dashboard with navigation
 - Logout functionality
 - Welcome message with user name
 - Responsive design
 
 ### Login.jsx
+
 User authentication form component.
 
 **Features:**
+
 - Email and password validation
 - Loading states
 - Error handling
 - Redirect after successful login
 
 ### Register.jsx
+
 User registration form component.
 
 **Features:**
+
 - Full name, email, and password fields
 - Client-side validation
 - Password confirmation
 - Account creation feedback
 
 ### ProtectedRoute.jsx
+
 Route protection wrapper component.
 
 **Features:**
+
 - JWT token validation
 - Automatic redirects to login
 - Loading states
@@ -296,38 +313,46 @@ The authentication context manages global user state and authentication logic.
 
 ```jsx
 // Creating context
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 // Context provider
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Authentication methods
-  const login = async (email, password) => { /* ... */ }
-  const register = async (userData) => { /* ... */ }
-  const logout = () => { /* ... */ }
+  const login = async (email, password) => {
+    /* ... */
+  };
+  const register = async (userData) => {
+    /* ... */
+  };
+  const logout = () => {
+    /* ... */
+  };
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      login,
-      register,
-      logout,
-      loading
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        register,
+        logout,
+        loading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 // Custom hook for consuming context
 export function useAuth() {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider')
+    throw new Error("useAuth must be used within AuthProvider");
   }
-  return context
+  return context;
 }
 ```
 
@@ -352,9 +377,9 @@ User tokens are persisted in localStorage for session management:
 
 ```javascript
 // Token management
-localStorage.setItem('token', jwtToken)
-localStorage.getItem('token')
-localStorage.removeItem('token')
+localStorage.setItem("token", jwtToken);
+localStorage.getItem("token");
+localStorage.removeItem("token");
 ```
 
 ## 🎨 Styling Guide
@@ -364,21 +389,21 @@ localStorage.removeItem('token')
 ```javascript
 // tailwind.config.js
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         primary: {
-          50: '#f0fdf4',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d'
-        }
-      }
-    }
+          50: "#f0fdf4",
+          500: "#22c55e",
+          600: "#16a34a",
+          700: "#15803d",
+        },
+      },
+    },
   },
-  plugins: []
-}
+  plugins: [],
+};
 ```
 
 ### Color Palette
@@ -466,39 +491,41 @@ npm run build
 
 ```javascript
 // vite.config.js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: 'dist',
+    outDir: "dist",
     sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom']
-        }
-      }
-    }
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+        },
+      },
+    },
   },
   server: {
     port: 5173,
-    open: true
-  }
-})
+    open: true,
+  },
+});
 ```
 
 ### Vercel Deployment
 
 1. **Connect Repository**
+
    ```bash
    # Push to GitHub
    git push origin main
    ```
 
 2. **Configure Vercel**
+
    - Build Command: `npm run build`
    - Output Directory: `dist`
    - Framework: `Vite`
@@ -540,17 +567,20 @@ const Login = lazy(() => import('./components/Login'))
 ### Manual Testing Checklist
 
 - [ ] **Authentication Flow**
+
   - [ ] User registration works
   - [ ] User login works
   - [ ] Protected routes redirect correctly
   - [ ] Logout clears session
 
 - [ ] **Form Validation**
+
   - [ ] Required fields show errors
   - [ ] Email validation works
   - [ ] Password strength validation
 
 - [ ] **Responsive Design**
+
   - [ ] Mobile layout (320px+)
   - [ ] Tablet layout (768px+)
   - [ ] Desktop layout (1024px+)
@@ -589,21 +619,25 @@ npm run test:e2e
 ### Common Issues
 
 #### 1. Backend Connection Error
+
 ```
 AxiosError: Network Error
 ```
 
 **Solutions:**
+
 - Ensure backend is running on http://localhost:5001
 - Check `VITE_API_BASE_URL` in `.env`
 - Verify CORS configuration in backend
 
 #### 2. Build Errors
+
 ```
 Error: Could not resolve "react"
 ```
 
 **Solutions:**
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -614,11 +648,13 @@ npm run dev -- --force
 ```
 
 #### 3. Styling Issues
+
 ```
 Tailwind classes not working
 ```
 
 **Solutions:**
+
 ```bash
 # Ensure Tailwind is properly configured
 npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch
@@ -627,11 +663,13 @@ npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch
 ```
 
 #### 4. Hot Reload Not Working
+
 ```
 Changes not reflected in browser
 ```
 
 **Solutions:**
+
 - Restart development server
 - Clear browser cache
 - Check console for errors
@@ -679,9 +717,7 @@ xl: 1280px   /* Extra large devices */
 ```jsx
 // Always start with mobile styles, then add larger screens
 <div className="p-4 md:p-6 lg:p-8">
-  <h1 className="text-xl md:text-2xl lg:text-3xl">
-    Mobile-First Heading
-  </h1>
+  <h1 className="text-xl md:text-2xl lg:text-3xl">Mobile-First Heading</h1>
 </div>
 ```
 
@@ -689,9 +725,7 @@ xl: 1280px   /* Extra large devices */
 
 ```jsx
 // Larger touch targets for mobile
-<button className="min-h-[44px] min-w-[44px] p-3 text-lg">
-  Touch Button
-</button>
+<button className="min-h-[44px] min-w-[44px] p-3 text-lg">Touch Button</button>
 ```
 
 ## 📞 Support
