@@ -2,18 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const path = require("path");
 const { connectDB, checkDBConnection, getDBStats } = require("./config/db");
 
-// Import routes
 const authRoutes = require("./routes/auth");
+const plantRoutes = require("./routes/plants");
+const plantDatabaseRoutes = require("./routes/plantRoutes");
+const profileRoutes = require("./routes/profile");
 
 const app = express();
 dotenv.config();
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware
 app.use(
   cors({
     origin: [
@@ -36,10 +37,13 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-// Routes
-app.use("/api/auth", authRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Health check route
+app.use("/api/auth", authRoutes);
+app.use("/api/plants", plantRoutes);
+app.use("/api/plant-database", plantDatabaseRoutes);
+app.use("/api/profile", profileRoutes);
+
 app.get("/", async (req, res) => {
   const dbStats = await getDBStats();
   res.json({
@@ -54,7 +58,6 @@ app.get("/", async (req, res) => {
   });
 });
 
-// Test route
 app.get("/test", (req, res) => {
   res.json({
     success: true,
@@ -63,7 +66,6 @@ app.get("/test", (req, res) => {
   });
 });
 
-// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -71,7 +73,6 @@ app.use((req, res) => {
   });
 });
 
-// Global error handler
 app.use((error, req, res, next) => {
   console.error("Global error:", error);
   res.status(500).json({
@@ -84,14 +85,13 @@ app.use((error, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5001;
-const host = "0.0.0.0"; // Listen on all interfaces
+const host = "0.0.0.0";
 
 const server = app.listen(PORT, host, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`🍃 Medicinal Leaves API ready`);
 });
 
-// Handle server errors
 server.on("error", (error) => {
   if (error.syscall !== "listen") {
     throw error;
@@ -111,7 +111,6 @@ server.on("error", (error) => {
   }
 });
 
-// Graceful shutdown
 process.on("SIGTERM", () => {
   console.log("🛑 SIGTERM received, shutting down gracefully");
   server.close(() => {
