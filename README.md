@@ -5,7 +5,6 @@
 [![React Version](https://img.shields.io/badge/react-19.1.1-blue)](https://reactjs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)](https://www.mongodb.com/atlas)
 
-> An AI-powered web application for identifying medicinal plants through image recognition with comprehensive plant information and medicinal properties.
 
 ## 📋 Table of Contents
 

@@ -1,7 +1,5 @@
 # 🔧 MediLeaf Backend
 
-> Node.js + Express.js + MongoDB backend API for the MediLeaf medicinal plants identification system.
-
 ## 📋 Table of Contents
 
 - [Overview](#overview)

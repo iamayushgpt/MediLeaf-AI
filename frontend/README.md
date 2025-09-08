@@ -1,6 +1,5 @@
 # 🎨 MediLeaf Frontend
 
-> Modern React application with Vite and Tailwind CSS for the MediLeaf medicinal plants identification system.
 
 ## 📋 Table of Contents
 
