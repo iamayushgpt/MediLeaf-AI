@@ -10,6 +10,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
+import PlantIdentification from "./components/PlantIdentification";
+import Profile from "./components/Profile";
+import QuizPage from "./components/QuizPage";
+
 
 function App() {
   return (
@@ -30,6 +34,52 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/identify"
+              element={
+                <ProtectedRoute>
+                  <PlantIdentification />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/quiz"
+              element={
+                <ProtectedRoute>
+                  <QuizPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/profile/edit"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+
 
             {/* Default redirect */}
             <Route path="/" element={<Navigate to="/home" replace />} />

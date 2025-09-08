@@ -7,10 +7,8 @@ import React, {
 } from "react";
 import authService from "../services/authService.js";
 import { hasToken, removeToken } from "../utils/token.js";
-
 // Auth Context
 const AuthContext = createContext();
-
 // Auth Reducer
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -60,11 +58,18 @@ const authReducer = (state, action) => {
         ...state,
         error: null,
       };
+    case "UPDATE_PROFILE":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      };
     default:
       return state;
   }
 };
-
 // Initial state
 const initialState = {
   isAuthenticated: false,
@@ -73,11 +78,9 @@ const initialState = {
   loading: hasToken(), // Set loading to true if token exists
   error: null,
 };
-
 // Auth Provider
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
-
   // Verify token
   const verifyToken = useCallback(async () => {
     dispatch({ type: "SET_LOADING", payload: true });
@@ -97,20 +100,16 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: "LOGOUT" });
     }
   }, []);
-
   // Check if user is logged in on app start
   useEffect(() => {
     if (hasToken()) {
       verifyToken();
     }
   }, [verifyToken]);
-
   // Login
   const login = useCallback(async (email, password) => {
     dispatch({ type: "LOGIN_START" });
-
     const result = await authService.login({ email, password });
-
     if (result.success) {
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -125,13 +124,10 @@ export const AuthProvider = ({ children }) => {
       return { success: false, error: result.error };
     }
   }, []);
-
   // Register
   const register = useCallback(async (fullName, email, password) => {
     dispatch({ type: "REGISTER_START" });
-
     const result = await authService.register({ fullName, email, password });
-
     if (result.success) {
       dispatch({
         type: "REGISTER_SUCCESS",
@@ -146,29 +142,29 @@ export const AuthProvider = ({ children }) => {
       return { success: false, error: result.error };
     }
   }, []);
-
   // Logout
   const logout = useCallback(() => {
     authService.logout();
     dispatch({ type: "LOGOUT" });
   }, []);
-
   // Clear error
   const clearError = useCallback(() => {
     dispatch({ type: "CLEAR_ERROR" });
   }, []);
-
+  // Update profile in context
+  const updateProfileInContext = useCallback((profileData) => {
+    dispatch({ type: "UPDATE_PROFILE", payload: profileData });
+  }, []);
   const value = {
     ...state,
     login,
     register,
     logout,
     clearError,
+    updateProfileInContext,
   };
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
 // Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -177,5 +173,4 @@ export const useAuth = () => {
   }
   return context;
 };
-
 export default AuthContext;

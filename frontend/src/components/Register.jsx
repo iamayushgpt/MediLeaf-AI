@@ -33,10 +33,9 @@ const Register = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  // Clear errors when component mounts
   useEffect(() => {
     clearError();
-  }, []); // Remove clearError from dependencies to prevent loops
+  }, []); 
 
   const validateForm = () => {
     const newErrors = {};
