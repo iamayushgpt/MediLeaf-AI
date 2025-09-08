@@ -97,7 +97,7 @@ const loginUser = async (loginData) => {
  * @returns {object} User profile
  */
 const getUserProfile = async (userId) => {
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).select("-password");
   if (!user) {
     throw new Error("User not found");
   }
@@ -106,6 +106,14 @@ const getUserProfile = async (userId) => {
     id: user._id,
     fullName: user.fullName,
     email: user.email,
+    phone: user.phone || "",
+    gender: user.gender || "",
+    dateOfBirth: user.dateOfBirth || null,
+    address: user.address || "",
+    city: user.city || "",
+    country: user.country || "",
+    bio: user.bio || "",
+    profileImage: user.profileImage || "",
     role: user.role,
     isEmailVerified: user.isEmailVerified,
     createdAt: user.createdAt,
